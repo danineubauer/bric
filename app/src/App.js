@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import TopBar from "./components/frame/TopBar.js";
-import { LeftBar } from "./components/frame/Leftbar";
+import LeftBar from "./components/frame/LeftBar";
 import "./App.css";
 
 function App() {
@@ -8,20 +8,7 @@ function App() {
     <div className="App">
       <TopBar />
       <LeftBar />
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header className="App-header"> </header>
     </div>
   );
 }
