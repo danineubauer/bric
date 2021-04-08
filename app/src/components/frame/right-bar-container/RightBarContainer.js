@@ -7,7 +7,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    margin: "25px",
+    margin: "25px 0px",
     padding: "15px",
     borderRadius: "6px",
     backgroundColor: "#E5E5E5",
@@ -18,6 +18,10 @@ const useStyles = makeStyles((theme) => ({
   arrowDownButton: {
     margin: "0",
     padding: "0",
+    cursor: "pointer",
+  },
+  addFile: {
+    cursor: "pointer",
   },
 }));
 
@@ -33,13 +37,13 @@ export default function RightBarContainer(props) {
             className={classes.arrowDownButton}
             onClick={props.onClick}
           >
-            <ExpandMoreIcon />
+            <ExpandMoreIcon onClick={props.onClick} />
           </IconButton>
         </Grid>
         <Grid item>{props.content}</Grid>
         <Grid item>
-          <IconButton>
-            <AddCircleIcon />
+          <IconButton className={classes.addFile}>
+            <AddCircleIcon onClick={props.onClick} />
           </IconButton>
         </Grid>
       </Grid>

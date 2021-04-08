@@ -19,21 +19,43 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
     flexDirection: "column",
     // display: "flex",
+    margin: "70px 100px",
     alignContent: "center",
     justifyContent: "center",
   },
+  meetingName: {
+    marginTop: "30px",
+    width: "100%",
+  },
 }));
+
+const meetingResourcesArray = [
+  "Google Slides",
+  "Figma prototype",
+  "confluence",
+];
+
+const participantsArray = ["Danielle", "Hannah", "Sai"];
 
 export default function RightBar() {
   const classes = useStyles();
 
+  const meetingResources = meetingResourcesArray.map((item) => {
+    return (
+      <div style={{ margin: "10px" }}>
+        <a href="#">{item}</a>
+      </div>
+    );
+  });
+
+  const participants = participantsArray.map((item) => {
+    return <div style={{ margin: "10px" }}>{item}</div>;
+  });
+
   return (
     <div className={classes.root}>
-      <RightBarContainer title="Meeting Resources" />
-      <RightBarContainer title="Participants" />
-
-      {/* <MeetingResources />
-      <Participants /> */}
+      <RightBarContainer title="Meeting Resources" content={meetingResources} />
+      <RightBarContainer title="Participants" content={participants} />
     </div>
   );
 }
