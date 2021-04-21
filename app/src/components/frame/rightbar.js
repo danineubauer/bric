@@ -1,31 +1,36 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import logo from "../../assets/logo.png";
+import Grid from "@material-ui/core/Grid";
 import RightBarContainer from "./right-bar-container/RightBarContainer";
+import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
+import AppsIcon from "@material-ui/icons/Apps";
+import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
+import ScreenShareIcon from "@material-ui/icons/ScreenShare";
+import ShareIcon from "@material-ui/icons/Share";
+import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
+import SportsEsportsIcon from "@material-ui/icons/SportsEsports";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: "transparent",
-    margin: "10px",
     right: 0,
-    width: "20%",
     position: "fixed",
-    height: "100vh",
+    height: "100hv",
     flexDirection: "column",
-    // display: "flex",
-    margin: "70px 100px",
+    margin: "10px 40px",
     alignContent: "center",
     justifyContent: "center",
   },
   meetingName: {
-    marginTop: "30px",
+    marginTop: "20px",
     width: "100%",
+  },
+  featureButton: {
+    border: "none",
+    backgroundColor: "none",
+    cursor: "pointer",
   },
 }));
 
@@ -35,7 +40,16 @@ const meetingResourcesArray = [
   "confluence",
 ];
 
-const participantsArray = ["Danielle", "Hannah", "Sai"];
+const featuresArray = [
+  <AccessAlarmIcon color="primary" />,
+  // <AppsIcon color="primary" />,
+  <ScreenShareIcon color="primary" />,
+  <ShareIcon color="primary" />,
+  // <PlayCircleFilledIcon color="primary" />,
+  // <SportsEsportsIcon />,
+];
+
+const participantsArray = ["Gal Gadot", "Natalie Portman", "Gene Simmons "];
 
 export default function RightBar() {
   const classes = useStyles();
@@ -52,10 +66,24 @@ export default function RightBar() {
     return <div style={{ margin: "10px" }}>{item}</div>;
   });
 
+  const features = featuresArray.map((item) => {
+    return (
+      <IconButton
+        style={{
+          margin: "5px",
+        }}
+        className={classes.featureButton}
+      >
+        {item}
+      </IconButton>
+    );
+  });
+
   return (
-    <div className={classes.root}>
+    <Grid container xs={2} className={classes.root}>
+      <RightBarContainer title="Meeting Features" content={features} />
       <RightBarContainer title="Meeting Resources" content={meetingResources} />
       <RightBarContainer title="Participants" content={participants} />
-    </div>
+    </Grid>
   );
 }

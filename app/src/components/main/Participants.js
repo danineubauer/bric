@@ -9,11 +9,6 @@ import avatar4 from "../../assets/hannahAvatar.png";
 import avatar5 from "../../assets/daniAvatar.png";
 import avatar6 from "../../assets/peruAvatar.jpeg";
 import avatar7 from "../../assets/kenAvatar.png";
-import Participants from "./Participants";
-import AgendaButton from "./AgendaButton";
-import AgendaWindow from "./PopupWindow";
-import GreyBackground from "../../common/GreyBackground";
-import PopupWindow from "./PopupWindow";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,20 +75,8 @@ const meetingParticipantsArray = [
   { first_name: "Ken", avatar: avatar7 },
 ];
 
-const agendaContent = (
-  <strong>
-    Welcome to the best meeting you've ever had in your life. Unlike other
-    meetings, today, we will not be wasting your time. We are deeply sorry for
-    all the horrible meetings you've had in your life but we promise, today,
-    this is going to change.
-  </strong>
-);
-
-export default function Main() {
+export default function Main(props) {
   const classes = useStyles();
-  const [showAgenda, setShowAgenda] = useState(false);
-  const [showParticipntProfile, setShowParticipantProfile] = useState(false);
-
   const [nameIsShown, setNameIsShown] = useState("");
   const [isTalking, setIsTalking] = useState(true);
 
@@ -123,30 +106,13 @@ export default function Main() {
     );
   });
   return (
-    <Grid container xs={8} className={classes.root}>
-      {showAgenda ? <GreyBackground /> : null}
-
-      <Typography align="left" variant="h4">
-        Ideation Meeting
-      </Typography>
-      <AgendaButton showAgenda={() => setShowAgenda(!showAgenda)} />
-      {showAgenda ? (
-        <PopupWindow
-          content={agendaContent}
-          handleExit={() => setShowAgenda(!showAgenda)}
-        />
-      ) : null}
-      {showParticipntProfile ? (
-        <PopupWindow
-          content={"llo"}
-          handleExit={() => setShowParticipantProfile(!showParticipntProfile)}
-        />
-      ) : null}
-      <Participants
-        showParticipants={() =>
-          setShowParticipantProfile(!showParticipntProfile)
-        }
-      />
+    <Grid
+      container
+      xs={12}
+      className={classes.participantsContainer}
+      onClick={props.showParticipants}
+    >
+      {meetingParticipants}
     </Grid>
   );
 }
