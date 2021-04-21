@@ -16,7 +16,7 @@ export default function SecondaryButton(props) {
     <Button
       variant="contained"
       color="secondary"
-      onClick={props.showAgenda}
+      onClick={props.onClick}
       className={classes.root}
     >
       {props.children}

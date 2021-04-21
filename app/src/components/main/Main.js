@@ -14,6 +14,7 @@ import AgendaButton from "./AgendaButton";
 import AgendaWindow from "./PopupWindow";
 import GreyBackground from "../../common/GreyBackground";
 import PopupWindow from "./PopupWindow";
+import SprintButton from "./SprintButton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -70,6 +71,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const agendaContent = (
+  <strong>
+    Welcome to the best meeting you've ever had in your life. Unlike other
+    meetings, today, we will not be wasting your time. We are deeply sorry for
+    all the horrible meetings you've had in your life but we promise, today,
+    this is going to change.
+  </strong>
+);
+
 const meetingParticipantsArray = [
   { first_name: "Sai", avatar: avatar1 },
   { first_name: "Railyn", avatar: avatar2 },
@@ -80,19 +90,11 @@ const meetingParticipantsArray = [
   { first_name: "Ken", avatar: avatar7 },
 ];
 
-const agendaContent = (
-  <strong>
-    Welcome to the best meeting you've ever had in your life. Unlike other
-    meetings, today, we will not be wasting your time. We are deeply sorry for
-    all the horrible meetings you've had in your life but we promise, today,
-    this is going to change.
-  </strong>
-);
-
 export default function Main() {
   const classes = useStyles();
   const [showAgenda, setShowAgenda] = useState(false);
   const [showParticipntProfile, setShowParticipantProfile] = useState(false);
+  const [showSprint, setShowSprint] = useState(false);
 
   const [nameIsShown, setNameIsShown] = useState("");
   const [isTalking, setIsTalking] = useState(true);
@@ -103,6 +105,20 @@ export default function Main() {
   const onMouseLeaveAvatar = (name) => {
     setNameIsShown(false);
   };
+
+  const handleSprintClicked = () => {
+    for (let index = 0; index < meetingParticipantsArray.length; index++) {
+      const highlightedParticipant = [];
+      const participant = meetingParticipantsArray[index];
+      setTimeout(() => {
+        setHighlightedParticipant(meetingParticipantsArray[index].first_name);
+      }, index * 5000);
+      setTimeout(() => {
+        setHighlightedParticipant("end");
+      }, meetingParticipantsArray.length * 5000);
+    }
+  };
+  const [highlightedParticipant, setHighlightedParticipant] = useState();
 
   const meetingParticipants = meetingParticipantsArray.map((person, index) => {
     return (
@@ -130,6 +146,8 @@ export default function Main() {
         Ideation Meeting
       </Typography>
       <AgendaButton showAgenda={() => setShowAgenda(!showAgenda)} />
+      <SprintButton sprintButtonClicked={() => handleSprintClicked()} />
+      <Typography variant="h4">{highlightedParticipant}</Typography>
       {showAgenda ? (
         <PopupWindow
           content={agendaContent}
@@ -142,6 +160,8 @@ export default function Main() {
           handleExit={() => setShowParticipantProfile(!showParticipntProfile)}
         />
       ) : null}
+      {showSprint ? "Sprint" : null}
+
       <Participants
         showParticipants={() =>
           setShowParticipantProfile(!showParticipntProfile)
