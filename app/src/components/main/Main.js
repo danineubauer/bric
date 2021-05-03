@@ -71,14 +71,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const agendaContent = (
-  <strong>
-    Welcome to the best meeting you've ever had in your life. Unlike other
-    meetings, today, we will not be wasting your time. We are deeply sorry for
-    all the horrible meetings you've had in your life but we promise, today,
-    this is going to change.
-  </strong>
-);
+const agendaContent = <strong>Meeting Agenda</strong>;
 
 const meetingParticipantsArray = [
   { first_name: "Sai", avatar: avatar1 },
@@ -114,7 +107,7 @@ export default function Main() {
         setHighlightedParticipant(meetingParticipantsArray[index].first_name);
       }, index * 5000);
       setTimeout(() => {
-        setHighlightedParticipant("end");
+        setHighlightedParticipant("Game Over");
       }, meetingParticipantsArray.length * 5000);
     }
   };
@@ -156,7 +149,7 @@ export default function Main() {
       ) : null}
       {showParticipntProfile ? (
         <PopupWindow
-          content={"llo"}
+          content={"Participant Profile"}
           handleExit={() => setShowParticipantProfile(!showParticipntProfile)}
         />
       ) : null}
